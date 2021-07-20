@@ -389,6 +389,8 @@ export default class Sudko extends LightningElement {
                     if (item.class === 'selected') {
                         if (item.label === '') {
                             item.label = this.gameBlock[indexx][indexy];
+							item.class = 'default';
+							item.default = true;
                             this.totalHints -= 1;
                         }
                     }
