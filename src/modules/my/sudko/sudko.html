@@ -1,0 +1,86 @@
+<template>
+	<div class="container">
+		<h1>
+			<center class="header">Sudko</center>
+			<center class="sub-header">Hints - {totalHints}</center>
+		</h1>
+		<table class="table1">
+			<template for:each={gameBlockToShow} for:item="block">
+				<tr key={block.key}>
+					<template for:each={block} for:item="block1">
+						<td data-target-id={block1.cordinate} onclick={handleBlock} class={block1.class}
+							key={block1.cordinate}>
+							{block1.label}
+						</td>
+					</template>
+				</tr>
+			</template>
+		</table>
+		<br>
+		<center>
+			<button variant="brand" label="Hint" onclick={addHints} class="button"
+				disabled={isHintsNotAvailable}>Hint
+			</button>
+		</center>
+		<br>
+		<br>
+		<center>
+				<button 
+							variant="brand"
+							label="Reset"
+							onclick={resetGame}
+							class="button">
+							Reset Game
+				</button>
+		</center>
+		<table class="table2">
+			<tr>
+				<td data-target-id="1" onclick={handleNumber}>
+					1
+				</td>
+				<td data-target-id="2" onclick={handleNumber}>
+					2
+				</td>
+				<td data-target-id="3" onclick={handleNumber}>
+					3
+				</td>
+				<td data-target-id="4" onclick={handleNumber}>
+					4
+				</td>
+				<td data-target-id="5" onclick={handleNumber}>
+					5
+				</td>
+				<td data-target-id="6" onclick={handleNumber}>
+					6
+				</td>
+				<td data-target-id="7" onclick={handleNumber}>
+					7
+				</td>
+				<td data-target-id="8" onclick={handleNumber}>
+					8
+				</td>
+				<td data-target-id="9" onclick={handleNumber}>
+					9
+				</td>
+				<td data-target-id="0" onclick={handleNumber}>
+					0
+				</td>
+			</tr>
+		</table>
+		<br>
+		<center class="sub-header">press 0 for erase the cell</center>
+		<div class="overlayToStop" if:true={isGameCompleted}>
+			<div class="overlay-content">
+				<div class="custom-loading-text-1">
+					<p style="font-size: xx-large;">Congratulation you won the game!</p>
+				</div>
+				<br>
+				<center>
+					<button variant="brand" class="button" label="Play again" onclick={playAgain}
+					>Play again
+					</button>
+				</center>
+			</div>
+		</div>
+	</div>
+</template>
