@@ -372,6 +372,7 @@ export default class Sudko extends LightningElement {
             console.log('Game Completed' + gameCompleted);
             if (gameCompleted) {
                 this.isGameCompleted = true;
+				this.isInvalidCellValue = false;
                 console.log('game completed');
             }else{
 				this.isInvalidCellValue = true;
