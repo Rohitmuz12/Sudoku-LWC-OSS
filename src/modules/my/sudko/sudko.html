@@ -3,6 +3,7 @@
 		<h1>
 			<center class="header">Sudko</center>
 			<center class="sub-header">Hints - {totalHints}</center>
+			<center class="sub-header redtext" if:true={isInvalidCellValue}>You have filled wrong value in the cell.</center>
 		</h1>
 		<table class="table1">
 			<template for:each={gameBlockToShow} for:item="block">

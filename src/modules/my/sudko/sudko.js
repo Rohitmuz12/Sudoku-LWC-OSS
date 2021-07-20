@@ -8,6 +8,8 @@ export default class Sudko extends LightningElement {
     totalHints = 3;
     @track gameBlockToShow = [];
     isGameCompleted = false;
+	isInvalidCellValue = false;
+
 
     connectedCallback() {
         console.log('COnnected callback');
@@ -45,6 +47,7 @@ export default class Sudko extends LightningElement {
         for (let i = 0; i < 9; i++) this.tempArray[i] = i + 1;
         this.tempArray = this.shuffle(this.tempArray);
         this.gameBlock = new Array(9);
+		this.isInvalidCellValue = false;
 
         for (let i = 0; i < 9; i++) {
             this.gameBlock[i] = new Array(9);
@@ -370,7 +373,9 @@ export default class Sudko extends LightningElement {
             if (gameCompleted) {
                 this.isGameCompleted = true;
                 console.log('game completed');
-            }
+            }else{
+				this.isInvalidCellValue = true;
+			}
         }
     }
 
