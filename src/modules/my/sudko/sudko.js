@@ -59,8 +59,6 @@ export default class Sudko extends LightningElement {
             this.gameBlockToShow[i] = new Array(9);
         }
 
-		console.log(this.gameBlock);
-
         this.unfillSudoku();
     }
 
@@ -303,8 +301,12 @@ export default class Sudko extends LightningElement {
                 }
             });
         });
+		
+        this.checkGameCompleted();
+    }
 
-        let completed = true;
+	checkGameCompleted(){
+		let completed = true;
 
         this.gameBlockToShow.forEach((element) => {
             element.forEach((item) => {
@@ -337,7 +339,7 @@ export default class Sudko extends LightningElement {
 				this.isInvalidCellValue = true;
 			}
         }
-    }
+	}
 
     checkNumberIsOkay(x, y, num) {
         if (!this.checkHorizontal(x, y, num)) return false;
@@ -357,6 +359,7 @@ export default class Sudko extends LightningElement {
 							item.class = 'default';
 							item.default = true;
                             this.totalHints -= 1;
+							this.checkGameCompleted();
                         }
                     }
                 });
