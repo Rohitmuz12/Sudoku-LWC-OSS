@@ -59,6 +59,8 @@ export default class Sudko extends LightningElement {
             this.gameBlockToShow[i] = new Array(9);
         }
 
+		console.log(this.gameBlock);
+
         this.unfillSudoku();
     }
 
