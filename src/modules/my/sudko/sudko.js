@@ -12,10 +12,6 @@ export default class Sudko extends LightningElement {
 
 
     connectedCallback() {
-        console.log('COnnected callback');
-        this.template.addEventListener('onkeyup', (evt) => {
-            console.log('Notification event', evt);
-        });
     }
 
     renderedCallback() {
@@ -55,16 +51,7 @@ export default class Sudko extends LightningElement {
 
         this.createSudokuBoardByArray();
 
-        console.log('-----after shuffle------');
         this.shuffleBoard();
-
-        for (let i = 0; i < 9; i++) {
-            let res = '';
-            for (let j = 0; j < 9; j++) {
-                res = res + this.gameBlock[i][j] + ' ';
-            }
-            console.log(res);
-        }
 
         this.gameBlockToShow = new Array(9);
 
@@ -73,65 +60,47 @@ export default class Sudko extends LightningElement {
         }
 
         this.unfillSudoku();
-
-        console.log('-----after unfill------');
-
-        for (let i = 0; i < 9; i++) {
-            let res = '';
-            for (let j = 0; j < 9; j++) {
-                res = res + this.gameBlockToShow[i][j].label + ' ';
-            }
-            console.log(res);
-        }
     }
 
     createSudokuBoardByArray() {
-        console.log(this.tempArray);
         this.gameBlock[0] = this.tempArray;
 
-        console.log(this.gameBlock[0]);
         this.gameBlock[1] = this.shiftArrayLeftByNTimes(
             [...this.gameBlock[0]],
             3
         );
-        console.log(this.gameBlock[1]);
         this.gameBlock[2] = this.shiftArrayLeftByNTimes(
             [...this.gameBlock[1]],
             3
         );
-        console.log(this.gameBlock[2]);
         this.gameBlock[3] = this.shiftArrayLeftByNTimes(
             [...this.gameBlock[2]],
             1
         );
 
-        console.log(this.gameBlock[3]);
         this.gameBlock[4] = this.shiftArrayLeftByNTimes(
             [...this.gameBlock[3]],
             3
         );
-        console.log(this.gameBlock[4]);
+       
         this.gameBlock[5] = this.shiftArrayLeftByNTimes(
             [...this.gameBlock[4]],
             3
         );
-        console.log(this.gameBlock[5]);
 
         this.gameBlock[6] = this.shiftArrayLeftByNTimes(
             [...this.gameBlock[5]],
             1
         );
-        console.log(this.gameBlock[6]);
         this.gameBlock[7] = this.shiftArrayLeftByNTimes(
             [...this.gameBlock[6]],
             3
         );
-        console.log(this.gameBlock[7]);
+       
         this.gameBlock[8] = this.shiftArrayLeftByNTimes(
             [...this.gameBlock[7]],
             3
         );
-        console.log(this.gameBlock[8]);
     }
 
     shiftArrayLeftByNTimes(tempArray, n) {
@@ -170,7 +139,7 @@ export default class Sudko extends LightningElement {
                     Math.floor(Math.random() * (i * 3 - (i - 1) * 3)) +
                     (i - 1) * 3;
             }
-            console.log(x + ' ' + y);
+           
             this.shuffleBoardByRow(x, y);
         }
 
@@ -300,11 +269,8 @@ export default class Sudko extends LightningElement {
     }
 
     handleBlock(event) {
-        console.log(event);
         let targetId = event.target.dataset.targetId;
-        console.log(targetId);
         let cordinate = targetId.split(':');
-        console.log(cordinate);
         if (
             !this.gameBlockToShow[parseInt(cordinate[0], 10)][
                 parseInt(cordinate[1], 10)
@@ -318,11 +284,6 @@ export default class Sudko extends LightningElement {
             this.gameBlockToShow[parseInt(cordinate[0], 10)][
                 parseInt(cordinate[1], 10)
             ].class = 'selected';
-            console.log(
-                this.gameBlockToShow[parseInt(cordinate[0], 10)][
-                    parseInt(cordinate[1], 10)
-                ].class
-            );
         }
     }
 
@@ -350,9 +311,6 @@ export default class Sudko extends LightningElement {
                 }
             });
         });
-
-        console.log('Completed : ' + completed);
-
         if (completed) {
             let gameCompleted = true;
             for (let i = 0; i < 9; i++) {
@@ -369,11 +327,10 @@ export default class Sudko extends LightningElement {
                     }
                 }
             }
-            console.log('Game Completed' + gameCompleted);
+
             if (gameCompleted) {
                 this.isGameCompleted = true;
 				this.isInvalidCellValue = false;
-                console.log('game completed');
             }else{
 				this.isInvalidCellValue = true;
 			}
